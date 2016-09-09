@@ -1,0 +1,12 @@
+{
+  "globalDependencies": {
+    "enzyme": "registry:dt/enzyme#2.4.1+20160709041153",
+    "mocha": "registry:dt/mocha#2.2.5+20160720003353",
+    "react": "registry:dt/react#0.14.0+20160829191040"
+  },
+  "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160723033700",
+    "react-dom": "registry:npm/react-dom#15.0.1+20160826174104",
+    "sinon": "registry:npm/sinon#1.16.0+20160723033700"
+  }
+}
