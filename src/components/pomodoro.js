@@ -4,9 +4,11 @@ import Button from './button';
 class Pomodoro extends Component {
   constructor() {
     super();
-    this.state = { breakTime: 5, sessionTime: 25, timeLeft:25 };
+    this.state = { breakTime: 5, sessionTime: 25, timeLeft: 25 };
     this.decreaseTime = this.decreaseTime.bind(this);
     this.increaseTime = this.increaseTime.bind(this);
+    this.handlebreakTime = this.handlebreakTime.bind(this);
+    this.handleSessionTime = this.handleSessionTime.bind(this);
   }
   decreaseTime(prop) {
     let propVal = this.state[prop] - 1;
@@ -16,17 +18,25 @@ class Pomodoro extends Component {
     let propVal = this.state[prop] + 1;
     this.setState({ [prop]: propVal });
   }
+  handlebreakTime(event) {
+    let num = parseInt(event.target.value);
+    this.setState({ breakTime: num });
+  }
+  handleSessionTime(event) {
+    let num = parseInt(event.target.value);
+    this.setState({ sessionTime: num, timeLeft: num });
+  }
   render() {
     return (
       <div>
         <Button icon="menu-left" onClick={() => this.decreaseTime('breakTime') } />
-        <input type="number" value={this.state.breakTime} />
+        <input type="number" value={this.state.breakTime} onChange={this.handlebreakTime}/>
         <Button icon="menu-right" onClick={() => this.increaseTime('breakTime') } />
 
         <h3 className="time-left">{this.state.timeLeft}</h3>
-        
+
         <Button icon="menu-left" onClick={() => this.decreaseTime('sessionTime') } />
-        <input type="number" value={this.state.sessionTime} />
+        <input type="number" value={this.state.sessionTime} onChange={this.handleSessionTime}/>
         <Button icon="menu-right" onClick={() => this.increaseTime('sessionTime') } />
       </div>
     );
