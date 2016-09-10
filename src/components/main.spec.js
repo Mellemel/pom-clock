@@ -4,14 +4,14 @@ import {expect} from 'chai';
 import Main from './main';
 
 describe('<Main />', () => {
-  it('should contain a title', () => {
-    const wrapper = shallow(<Main />);
-    expect(wrapper.find('h1').text()).to.have.length.above(0);
-  });
-
   it('should contain a header', () => {
     const wrapper = shallow(<Main />);
     expect(wrapper.find('Header')).to.be.of.length(1);
+  });
+
+  it('should display a button', () => {
+    const wrapper = shallow(<Main />);
+    expect(wrapper.find('button')).to.have.length(1);
   });
 
   it('should contain a pomodoro list', () => {

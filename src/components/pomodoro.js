@@ -12,11 +12,19 @@ class Pomodoro extends Component {
   }
   decreaseTime(prop) {
     let propVal = this.state[prop] - 1;
-    this.setState({ [prop]: propVal });
+    if (prop == 'sessionTime') {
+      this.setState({ sessionTime: propVal, timeLeft: propVal });
+    } else {
+      this.setState({ [prop]: propVal });
+    }
   }
   increaseTime(prop) {
     let propVal = this.state[prop] + 1;
-    this.setState({ [prop]: propVal });
+    if (prop == 'sessionTime') {
+      this.setState({ sessionTime: propVal, timeLeft: propVal });
+    } else {
+      this.setState({ [prop]: propVal });
+    }
   }
   handlebreakTime(event) {
     let num = parseInt(event.target.value);

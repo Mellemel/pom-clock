@@ -10,12 +10,11 @@ class Pomodorolist extends Component {
     this.addClock = this.addClock.bind(this);
   }
   removeClock() {
-    let lessClocks = --this.state.numOfClocks;
+    let lessClocks = --this.state.numOfClocks || 1;
     this.setState({ numOfClocks: lessClocks });
   }
   addClock() {
-    let moreClocks = ++this.state.numOfClocks;
-    console.log(moreClocks);
+    let moreClocks = ++this.state.numOfClocks == 5 ? 5 : this.state.numOfClocks;
     this.setState({ numOfClocks: moreClocks });
   }
   render() {

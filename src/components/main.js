@@ -5,17 +5,20 @@ import Header from './header';
 class Main extends Component {
   constructor() {
     super();
-    this.state = {start:false};
+    this.state = { start: false };
     this.switchState = this.switchState.bind(this);
   }
   switchState() {
-    this.setState({start: !this.state.start});
+    this.setState({ start: !this.state.start });
   }
   render() {
     return (
       <div className="container">
-        <h1 className="text-center">Pom Clock</h1>
-        <Header start={this.state.start} switchState={this.switchState} />
+        <Header>
+          <button className="btn btn-default" onClick={this.switchState}>
+            {this.state.start ? "Stop" : "Start"}
+          </button>
+        </Header>
         <Pomodorolist start={this.state.start} />
       </div>
     );

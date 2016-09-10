@@ -25,11 +25,11 @@ describe("<Pomodorolist />", () => {
   });
 
   it('should remove a clock when remove button is pressed', () => {
-    const wrapper = mount(<Pomodorolist />);
+    const wrapper = mount(<Pomodorolist />).setState({numOfClocks: 2});
     const button = wrapper.findWhere(n=>n.prop('icon') == 'minus');
 
-    expect(wrapper.find('Pomodoro')).to.have.length(1);
+    expect(wrapper.find('Pomodoro')).to.have.length(2);
     button.simulate('click');
-    expect(wrapper.find('Pomodoro')).to.have.length(0);
+    expect(wrapper.find('Pomodoro')).to.have.length(1);
   });
 });
