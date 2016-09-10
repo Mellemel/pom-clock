@@ -4,44 +4,39 @@ import {expect} from 'chai';
 import Main from './main';
 
 describe('<Main />', () => {
-  it('should have a title', () => {
+  it('should contain a title', () => {
     const wrapper = shallow(<Main />);
-    const h1 = wrapper.find('h1');
-
-    expect(wrapper.contains(h1)).to.be.true.and(h1.text()).to.have.length.above(0);
+    expect(wrapper.find('h1').text()).to.have.length.above(0);
   });
 
-  it('should have 2 headings with \'Break Length\' and \'Session Length\'', () => {
+  it('should contain a header', () => {
     const wrapper = shallow(<Main />);
-
-    expect(wrapper.find(<h3/>)).to.have.length(2);
-    expect(wrapper.findWhere(n => n.text() == 'Break Length')).to.have.length(1);
-    expect(wrapper.findwhere(n => n.text() == 'Session Length')).to.have.length(1);
+    expect(wrapper.find('Header')).to.be.of.length(1);
   });
 
-  it('should have a button that switches between start and stop when pressed', () => {
+  it('should contain a pomodoro list', () => {
     const wrapper = shallow(<Main />);
-    const button = wrapper.find('button');
-
-    expect(wrapper.contains(button)).to.be.equal(true);
-    expect(button.text()).to.equal('Start');
-    expect(button.simulate('click').text()).to.equal('Stop');
-
+    expect(wrapper.find('Pomodorolist')).to.be.of.length(1);
   });
 
   it('should switch the state between true and false when button is pressed', () => {
-    const wrapper = shallow(<Main />);
-    const button = wrapper.find('button');
-
-    expect(wrapper.state().start).to.be.true;
-    button.simulate('click');
-    expect(wrapper.state().start).to.be.false;
-  });
-
-  it('should start/stop the timer of the current clock', () => {
     const wrapper = mount(<Main />);
-    const button = wrapper.find('button').debug();
+
+    expect(wrapper.state().start).to.be.false;
+    wrapper.find('#header button').simulate('click');
+    expect(wrapper.state().start).to.be.true;
   });
 
-  it('should disable all click actions');
+  it('should have a button that switches between start and stop when pressed', () => {
+    const wrapper = mount(<Main />);
+    const button = wrapper.find('#header button');
+
+    expect(button.text()).to.equal('Start');
+    expect(button.simulate('click').text()).to.equal('Stop');
+    expect(button.text()).to.equal('Stop');
+  });
+
+  it('should start/stop the timer of the current clock');
+
+  it('should disable all click actions when start button displays false');
 });
