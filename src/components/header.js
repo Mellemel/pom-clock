@@ -21,8 +21,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  start: React.PropTypes.func,
-  switchState: React.PropTypes.bool
+  start: React.PropTypes.bool,
+  switchState: React.PropTypes.func
 };
 
 export default Header;
