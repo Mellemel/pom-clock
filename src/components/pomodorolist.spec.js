@@ -1,39 +1,35 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {expect} from 'chai';
 import Pomodorolist from './pomodorolist';
+import Pomodoro from './pomodoro';
 
 describe("<Pomodorolist />", () => {
   it('should contain at least one PomodoroClock', () => {
     const wrapper = shallow(<Pomodorolist />);
-    expect(wrapper.contain(<Pomodoro />)).to.be.equal(true);
+    expect(wrapper.contains(<Pomodoro />)).to.be.equal(true);
   });
 
-  it('should display an add button with class add', () => {
+  it('should display two buttons', () => {
     const wrapper = shallow(<Pomodorolist />);
-    expect(wrapper.contains(<button className="add" />)).to.be.true;
-  });
-
-  it('should display a remove button with class remove', () => {
-    const wrapper = shallow(<Pomodorolist />);
-    expect(wrapper.contains(<button className="remove" />)).to.be.true;
+    expect(wrapper.find('Button')).to.be.of.length(2);
   });
 
   it('should add a clock when add button is pressed', () => {
-    const wrapper = shallow(<Pomodorolist />);
-    const button = wrapper.find('.add');
+    const wrapper = mount(<Pomodorolist />);
+    const button = wrapper.findWhere(n=>n.prop('icon') == 'plus');
 
-    expect(wrapper.find(<Pomodoro />)).to.have.length(1);
+    expect(wrapper.find('Pomodoro')).to.have.length(1);
     button.simulate('click');
-    expect(wrapper.find(<Pomodoro />)).to.have.length(2);
+    expect(wrapper.find('Pomodoro')).to.have.length(2);
   });
 
   it('should remove a clock when remove button is pressed', () => {
-    const wrapper = shallow(<Pomodorolist />);
-    const button = wrapper.find('.remove');
+    const wrapper = mount(<Pomodorolist />);
+    const button = wrapper.findWhere(n=>n.prop('icon') == 'minus');
 
-    expect(wrapper.find(<Pomodoro />)).to.have.length(1);
+    expect(wrapper.find('Pomodoro')).to.have.length(1);
     button.simulate('click');
-    expect(wrapper.find(<Pomodoro />)).to.have.length(0);
+    expect(wrapper.find('Pomodoro')).to.have.length(0);
   });
 });
