@@ -2,7 +2,8 @@
   "globalDependencies": {
     "enzyme": "registry:dt/enzyme#2.4.1+20160709041153",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
-    "react": "registry:dt/react#0.14.0+20160829191040"
+    "react": "registry:dt/react#0.14.0+20160829191040",
+    "webpack": "registry:dt/webpack#1.12.9+20160724112410"
   },
   "dependencies": {
     "chai": "registry:npm/chai#3.5.0+20160723033700",
