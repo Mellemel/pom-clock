@@ -5,47 +5,42 @@ class Pomodoro extends Component {
   constructor() {
     super();
     this.state = { breakTime: 5, sessionTime: 25, timeLeft: 25 };
-    this.decreaseTime = this.decreaseTime.bind(this);
-    this.increaseTime = this.increaseTime.bind(this);
-    this.handlebreakTime = this.handlebreakTime.bind(this);
-    this.handleSessionTime = this.handleSessionTime.bind(this);
+    this.setTime = this.setTime.bind(this);
+    this.changeTime = this.changeTime.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
-  decreaseTime(prop) {
-    let propVal = this.state[prop] - 1;
+  setTime(prop, val) {
+    // Prevent user from going below zero
+    let propVal = val < 0 ? 0 : val;
     if (prop == 'sessionTime') {
       this.setState({ sessionTime: propVal, timeLeft: propVal });
     } else {
-      this.setState({ [prop]: propVal });
+      this.setState({ 'breakTime': propVal });
     }
   }
-  increaseTime(prop) {
-    let propVal = this.state[prop] + 1;
-    if (prop == 'sessionTime') {
-      this.setState({ sessionTime: propVal, timeLeft: propVal });
-    } else {
-      this.setState({ [prop]: propVal });
-    }
+  changeTime(prop, val){
+    let newVal = this.state[prop] + val;
+    this.setTime(prop, newVal);
   }
-  handlebreakTime(event) {
-    let num = parseInt(event.target.value);
-    this.setState({ breakTime: num });
-  }
-  handleSessionTime(event) {
-    let num = parseInt(event.target.value);
-    this.setState({ sessionTime: num, timeLeft: num });
+  handleInput(event) {
+    let value = event.target.value;
+    let id = event.target.id;
+    // value from event comes back as a string
+    var num = !value ? 0 : parseInt(value);
+    this.setTime(id, num);
   }
   render() {
     return (
       <div>
-        <Button icon="menu-left" onClick={() => this.decreaseTime('breakTime') } />
-        <input type="number" value={this.state.breakTime} onChange={this.handlebreakTime}/>
-        <Button icon="menu-right" onClick={() => this.increaseTime('breakTime') } />
+        <Button icon="menu-left" onClick={() => this.changeTime('breakTime', -1) } />
+        <input id="breakTime" type="number" value={this.state.breakTime} onChange={this.handleInput}/>
+        <Button icon="menu-right" onClick={() => this.changeTime('breakTime', 1) } />
 
         <h3 className="time-left">{this.state.timeLeft}</h3>
 
-        <Button icon="menu-left" onClick={() => this.decreaseTime('sessionTime') } />
-        <input type="number" value={this.state.sessionTime} onChange={this.handleSessionTime}/>
-        <Button icon="menu-right" onClick={() => this.increaseTime('sessionTime') } />
+        <Button icon="menu-left" onClick={() => this.changeTime('sessionTime', -1) } />
+        <input id="sessionTime" type="number" value={this.state.sessionTime} onChange={this.handleInput}/>
+        <Button icon="menu-right" onClick={() => this.changeTime('sessionTime', 1) } />
       </div>
     );
   }
