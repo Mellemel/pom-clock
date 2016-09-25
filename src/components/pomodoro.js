@@ -59,7 +59,6 @@ class Pomodoro extends Component {
       }
     };
 
-    decreaseTime();
     this.timer = setInterval(decreaseTime, 1000);
   }
 
@@ -78,8 +77,8 @@ class Pomodoro extends Component {
 
   render() {
     return (
-      <div className="row center-items pomodoro">
-        <div className="col-xs-4 col-sm-2 col-sm-offset-3">
+      <div className="row vcenter pomodoro">
+        <div className="col-xs-5 col-sm-4">
           <div className="input-group">
             <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('breakTime', -1) } />
             <input id="breakTime" className="form-control text-center" type="number" value={this.state.breakTime} onChange={this.handleInput}/>
@@ -87,11 +86,11 @@ class Pomodoro extends Component {
           </div>
         </div>
 
-        <div className="col-xs-4 col-sm-2">
+        <div className="col-xs-2 col-sm-4 time-left vcenter">
           <h3 className="time-left">{this.convertTime(this.state.timeLeft) }</h3>
         </div>
 
-        <div className="col-xs-4 col-sm-2">
+        <div className="col-xs-5 col-sm-4">
           <div className="input-group">
             <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('sessionTime', -1) } />
             <input id="sessionTime" className="form-control text-center" type="number" value={this.state.sessionTime} onChange={this.handleInput}/>

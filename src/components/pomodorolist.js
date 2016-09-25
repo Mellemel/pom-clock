@@ -45,7 +45,7 @@ class Pomodorolist extends Component {
     return (
       <div className="row text-center">
         {clocks}
-        <div className='minus-add' style={{ display: 'inline-block' }}>
+        <div className="minus-add">
           <Button disabled={this.props.start} icon="minus" onClick={this.removeClock} />
           <Button disabled={this.props.start} icon="plus" onClick={this.addClock} />
         </div>
