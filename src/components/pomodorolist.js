@@ -14,9 +14,9 @@ class Pomodorolist extends Component {
     this.addClock();
   }
 
-  removeClock(id) {
-    let lessClocks = this.state.clocks.filter(n => n.id != id);
-    console.log(lessClocks);
+  removeClock() {
+    this.state.clocks.pop();
+    let lessClocks = this.state.clocks;
     this.setState({ clocks: lessClocks });
   }
 
@@ -29,13 +29,12 @@ class Pomodorolist extends Component {
     };
     this.state.clocks.push(clock);
     let moreClocks = this.state.clocks.slice();
-    console.log(moreClocks);
     this.setState({ clocks: moreClocks });
   }
 
   render() {
     let clocks = this.state.clocks.map((clock, index) => {
-      clock.disabled = this.props.start
+      clock.disabled = this.props.start;
       if (index == 0) {
         clock.start = this.props.start;
         return <Pomodoro key={clock.id} {...clock}/>;
@@ -45,10 +44,11 @@ class Pomodorolist extends Component {
 
     return (
       <div className="row text-center">
-        <div className="col-sm-12">
-          {clocks}
+        {clocks}
+        <div className='minus-add' style={{ display: 'inline-block' }}>
+          <Button disabled={this.props.start} icon="minus" onClick={this.removeClock} />
+          <Button disabled={this.props.start} icon="plus" onClick={this.addClock} />
         </div>
-        <Button disabled={this.props.start} icon="plus" onClick={this.addClock} />
       </div>
     );
   }

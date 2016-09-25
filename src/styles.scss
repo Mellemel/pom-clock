@@ -1,6 +1,46 @@
-
+$grid-gutter-width: 20px;
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+.center-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media screen and (max-width: 540px) {
+  .center-items > div {
+  flex-grow: 1;
+  width: auto;
+  }
+  .float-right {
+    float: right;
+  }
+  .float-left {
+    float: left;
+  }
+}
+
+#breakTime, #sessionTime {
+  padding: 0px;
+}
+
+.time-left {
+  margin: 0px;
+}
+
+.minus-add > span {
+  display: inline-block;
+  width: inherit;
+}
+
+.minus-add > span > button {
+  width: 75px;
+}
+
+.pomodoro {
+  margin: 10px 0 20px 0;
 }

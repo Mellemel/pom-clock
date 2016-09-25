@@ -45,21 +45,21 @@ class Pomodoro extends Component {
     let decreaseTime = () => {
       // timeleft will switch to breakTime after the next callback in setinterval
       if (!this.state.timeLeft) {
-        this.state.removeMe--
+        this.state.removeMe--;
         if (!this.state.removeMe) {
-          this.stopTimer()
-          this.props.removeClock(this.props.id)
+          this.stopTimer();
+          this.props.removeClock(this.props.id);
         } else {
-          let breakTime = this.state.breakTime * 60
-          this.setState({ timeLeft: breakTime })
+          let breakTime = this.state.breakTime * 60;
+          this.setState({ timeLeft: breakTime });
         }
       } else {
         let timeLeft = this.state.timeLeft - 1;
         this.setState({ timeLeft: timeLeft });
       }
-    }
+    };
 
-    decreaseTime()
+    decreaseTime();
     this.timer = setInterval(decreaseTime, 1000);
   }
 
@@ -68,28 +68,36 @@ class Pomodoro extends Component {
   }
 
   convertTime(time) {
-    let minutes = ~~(time / 60)
-    let seconds = time % 60
+    let minutes = ~~(time / 60);
+    let seconds = time % 60;
     if (seconds < 10) {
-      seconds = '0' + seconds
+      seconds = '0' + seconds;
     }
     return minutes + ':' + seconds;
   }
 
   render() {
     return (
-      <div>
-        <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('breakTime', -1) } />
-        <input id="breakTime" type="number" value={this.state.breakTime} onChange={this.handleInput}/>
-        <Button icon="menu-right" disabled={this.props.disabled} onClick={() => this.changeTime('breakTime', 1) } />
+      <div className="row center-items pomodoro">
+        <div className="col-xs-4 col-sm-2 col-sm-offset-3">
+          <div className="input-group">
+            <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('breakTime', -1) } />
+            <input id="breakTime" className="form-control text-center" type="number" value={this.state.breakTime} onChange={this.handleInput}/>
+            <Button icon="menu-right" disabled={this.props.disabled} onClick={() => this.changeTime('breakTime', 1) } />
+          </div>
+        </div>
 
-        <h3 className="time-left">{this.convertTime(this.state.timeLeft) }</h3>
+        <div className="col-xs-4 col-sm-2">
+          <h3 className="time-left">{this.convertTime(this.state.timeLeft) }</h3>
+        </div>
 
-        <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('sessionTime', -1) } />
-        <input id="sessionTime" type="number" value={this.state.sessionTime} onChange={this.handleInput}/>
-        <Button icon="menu-right" disabled={this.props.disabled} onClick={() => this.changeTime('sessionTime', 1) } />
-
-        <Button icon="minus" disabled={this.props.disabled} onClick={() => this.props.removeClock(this.props.id) } />
+        <div className="col-xs-4 col-sm-2">
+          <div className="input-group">
+            <Button icon="menu-left" disabled={this.props.disabled} onClick={() => this.changeTime('sessionTime', -1) } />
+            <input id="sessionTime" className="form-control text-center" type="number" value={this.state.sessionTime} onChange={this.handleInput}/>
+            <Button icon="menu-right" disabled={this.props.disabled} onClick={() => this.changeTime('sessionTime', 1) } />
+          </div>
+        </div>
       </div>
     );
   }
