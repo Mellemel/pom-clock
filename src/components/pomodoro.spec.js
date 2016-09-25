@@ -12,7 +12,7 @@ describe("<Pomodoro />", () => {
 
   it("should display four buttons", () => {
     const wrapper = shallow(<Pomodoro />);
-    expect(wrapper.find('Button')).to.have.length(4);
+    expect(wrapper.find('Button')).to.have.length(5);
   });
 
   it("should display the time left", () => {

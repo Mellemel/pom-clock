@@ -9,6 +9,7 @@ class Pomodoro extends Component {
     this.changeTime = this.changeTime.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
+
   setTime(prop, val) {
     // Prevent user from going below zero
     let propVal = val < 0 ? 0 : val;
@@ -18,10 +19,12 @@ class Pomodoro extends Component {
       this.setState({ 'breakTime': propVal });
     }
   }
-  changeTime(prop, val){
+
+  changeTime(prop, val) {
     let newVal = this.state[prop] + val;
     this.setTime(prop, newVal);
   }
+
   handleInput(event) {
     let value = event.target.value;
     let id = event.target.id;
@@ -29,6 +32,7 @@ class Pomodoro extends Component {
     var num = !value ? 0 : parseInt(value);
     this.setTime(id, num);
   }
+
   render() {
     return (
       <div>
@@ -41,9 +45,17 @@ class Pomodoro extends Component {
         <Button icon="menu-left" onClick={() => this.changeTime('sessionTime', -1) } />
         <input id="sessionTime" type="number" value={this.state.sessionTime} onChange={this.handleInput}/>
         <Button icon="menu-right" onClick={() => this.changeTime('sessionTime', 1) } />
+
+        <Button icon="minus" onClick={()=>this.props.removeClock(this.props.id)} />
       </div>
     );
   }
 }
+
+Pomodoro.propTypes = {
+  id: React.PropTypes.number,
+  removeClock: React.PropTypes.func,
+  start: React.PropTypes.bool
+};
 
 export default Pomodoro;

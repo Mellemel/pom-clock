@@ -5,27 +5,44 @@ import Button from './button';
 class Pomodorolist extends Component {
   constructor() {
     super();
-    this.state = ({ numOfClocks: 1 });
+    this.state = ({ clocks: [], totalClocks: 0 });
     this.removeClock = this.removeClock.bind(this);
     this.addClock = this.addClock.bind(this);
   }
-  removeClock() {
-    let lessClocks = --this.state.numOfClocks || 1;
-    this.setState({ numOfClocks: lessClocks });
+
+  componentDidMount() {
+    this.addClock();
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
+  removeClock(id) {
+    let lessClocks = this.state.clocks.filter(n => n.id != id);
+    console.log(lessClocks);
+    this.setState({ clocks: lessClocks });
+  }
+
   addClock() {
-    let moreClocks = ++this.state.numOfClocks == 5 ? 5 : this.state.numOfClocks;
+    let clock = {
+      id: this.state.totalClocks++,
+      start: false,
+      removeClock: this.removeClock
+    };
+    let moreClocks = this.state.clocks.push(clock);
+    console.log(this.state.clocks);
     this.setState({ numOfClocks: moreClocks });
   }
+
   render() {
+    let clocks = this.state.clocks.map((clock) =>
+      <Pomodoro key={clock.id} {...clock}/>);
 
     return (
       <div className="row text-center">
         <div className="col-sm-12">
-          {[...Array(this.state.numOfClocks)].map((x, i) =>
-            <Pomodoro key={'' + i} />
-          ) }
-          <Button icon="minus" onClick={this.removeClock} />
+          {clocks}
         </div>
         <Button icon="plus" onClick={this.addClock} />
       </div>
