@@ -24,16 +24,18 @@ class Pomodorolist extends Component {
     let clock = {
       id: this.state.totalClocks++,
       start: false,
+      disabled: false,
       removeClock: this.removeClock
     };
-    this.state.clocks.push(clock)
-    let moreClocks = this.state.clocks.slice()
+    this.state.clocks.push(clock);
+    let moreClocks = this.state.clocks.slice();
     console.log(moreClocks);
     this.setState({ clocks: moreClocks });
   }
 
   render() {
     let clocks = this.state.clocks.map((clock, index) => {
+      clock.disabled = this.props.start
       if (index == 0) {
         clock.start = this.props.start;
         return <Pomodoro key={clock.id} {...clock}/>;
